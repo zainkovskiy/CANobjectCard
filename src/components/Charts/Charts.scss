@@ -1,0 +1,17 @@
+.tooltip{
+  background-color: rgba(0, 0, 0, 0.121);
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  color: #737373;
+  &__label{
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+  }
+  &__intro{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+  }
+}

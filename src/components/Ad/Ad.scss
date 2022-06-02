@@ -1,0 +1,26 @@
+.ad{
+  &__title{
+    font-family: 'Montserrat', sans-serif;
+    color: #737373;
+    display: block;
+    margin: 0 0 0.5rem 0;
+  }
+  &__top{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    &-left{
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+  &__link{
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,50 @@
+.status {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    color: #737373;
+    border-bottom: 1px dashed #737373;
+    align-items: flex-end;
+    font-size: 12px;
+
+    & span {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+  }
+  &__link{
+    color: rgb(56, 149, 255);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s;
+    &:hover{
+      transform: scale(1.1);
+    }
+    &:active{
+      transform: scale(1);
+    }
+  }
+  &__change{
+    display: inline-flex;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 2px;
+    transition: background-color 0.3s;
+    &:hover{
+      background-color: #ccc;
+    }
+    &:active{
+      background-color: #fff;
+    }
+  }
+}

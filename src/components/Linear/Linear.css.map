@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAA;EACX,WAAW,EAAE,wBAAwB;EACrC,WAAW,EAAE,GAAG;EAChB,cAAc,EAAE,KAAK;CACtB",
+    "sources": [
+        "Linear.scss"
+    ],
+    "names": [],
+    "file": "Linear.css"
+}

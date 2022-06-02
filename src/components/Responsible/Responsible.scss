@@ -1,0 +1,19 @@
+.responsible{
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  &__search{
+    display: flex;
+    gap: 1rem;
+  }
+  &__row{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    color: #737373;
+    font-weight: 400;
+    width: 100%;
+    margin: 0;
+    font-size: 14px;
+  }
+}

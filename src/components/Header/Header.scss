@@ -1,0 +1,11 @@
+.header{
+  padding: 1rem;
+  border: 1px solid #484848;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__logo{
+    height: 50px;
+  }
+}

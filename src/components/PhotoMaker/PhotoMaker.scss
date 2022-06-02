@@ -1,0 +1,28 @@
+.photo-comment {
+  width: 100%;
+  resize: none;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  outline: none;
+  border-radius: 5px;
+  &:placeholder{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+  }
+  &:focus{
+    border: 1px solid #1976d2;
+  }
+}
+
+.photo-text{
+  margin: 0 0 1rem 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  color: #737373;
+  display: block;
+}

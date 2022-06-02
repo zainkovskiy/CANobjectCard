@@ -1,0 +1,154 @@
+import React, { Component } from "react";
+import Dialog from '@mui/material/Dialog';
+import axios from 'axios';
+
+import './App.scss';
+
+import { Header } from 'components/Header';
+import { Linear } from "components/Linear";
+import { Content } from "components/Content";
+import { Responsible } from "components/Responsible";
+import { PhotoMaker } from "components/PhotoMaker";
+import { Reservation } from 'components/Reservation';
+
+export class App extends Component {
+  state = {
+    loader: true,
+    requestError: false,
+    object: '',
+    responsibleOpen: false,
+    photoMaker: false,
+    reservation: false,
+  }
+  openSelectResponsible = () => {
+    this.setState({ responsibleOpen: !this.state.responsibleOpen })
+  }
+  openDialogPhotoMaker = () => {
+    this.setState({ photoMaker: !this.state.photoMaker })
+  }
+  openDialogReservation = () => {
+    this.setState({ reservation: !this.state.reservation })
+  }
+
+  setNewPrice = (price, owerState, owerPrice) => {
+    const copyState = Object.assign({}, this.state.object)
+    copyState.params.reqPrice = price;
+    copyState.params.reqOverstate = owerState;
+    copyState.params.reqOverstatePrice = owerPrice;
+    this.setState({ object: copyState })
+  }
+
+  setNewResponsible = async (user) => {
+    const copyState = Object.assign({}, this.state.object)
+    copyState.blocks.header.realtor.UID = user.ID;
+    copyState.blocks.header.realtor.name = `${user.LAST_NAME} ${user.NAME}`;
+    this.setState({ object: copyState })
+    try {
+      const res = await axios.post('https://crm.centralnoe.ru/dealincom/factory/objectViewer.php', {
+        action: 'newResponsible',
+        reqNumber: this.state.object.reqNumber,
+        responsible: user.LOGIN,
+        author: userLogin,
+        dealId: dealId
+      })
+      console.log(res);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+  getData = async () => {
+    try {
+      const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', {
+        "action": "get",
+        "reqNumber": reqNumber,
+        "userId": userId,
+        "userLogin": userLogin,
+        "source": source
+      })
+      console.log(res);
+      if (res.statusText === "OK") {
+        this.setState({ object: res.data })
+      } else {
+        this.setState({ requestError: true })
+      }
+    } catch (err) {
+      console.log(err.message);
+      this.setState({ requestError: true })
+    } finally {
+      this.setState({ loader: false });
+    }
+  }
+  render() {
+    return (
+      <>
+        {
+          this.state.loader ?
+            <Linear /> :
+            <>
+              {
+                this.state.requestError ?
+                  <span className="error">Ошибка, попробуйте перезагрузить страницу</span> :
+                  <>
+                    <Content
+                      object={this.state.object}
+                      responsibleOpen={this.openSelectResponsible}
+                      setNewPrice={this.setNewPrice}
+                      openDialogPhotoMaker={this.openDialogPhotoMaker}
+                      openDialogReservation={this.openDialogReservation}
+                    />
+                    {
+                      this.state.responsibleOpen &&
+                      <Dialog
+                        open={this.state.responsibleOpen}
+                        onClose={this.openSelectResponsible}
+                        maxWidth={'lg'}
+                        fullWidth={true}
+                      >
+                        <Responsible
+                          onClose={this.openSelectResponsible}
+                          setNewResponsible={this.setNewResponsible}
+                        />
+                      </Dialog>
+                    }
+                    {
+                      this.state.photoMaker &&
+                      <Dialog
+                        open={this.state.photoMaker}
+                        onClose={this.openDialogPhotoMaker}
+                        maxWidth={'md'}
+                        fullWidth={true}
+                      >
+                        <PhotoMaker
+                          onClose={this.openDialogPhotoMaker}
+                          reqNumber={this.state.object.reqNumber}
+                        />
+                      </Dialog>
+                    }
+                    {
+                      this.state.reservation &&
+                      <Dialog
+                        open={this.state.reservation}
+                        onClose={this.openDialogReservation}
+                        maxWidth={'md'}
+                        fullWidth={true}
+                      >
+                        <Reservation
+                          onClose={this.openDialogReservation}
+                          reqNumber={this.state.object.reqNumber}
+                          source={this.state.object.reqType}
+                        />
+                      </Dialog>
+                    }
+                  </>
+              }
+            </>
+        }
+      </>
+    )
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+}

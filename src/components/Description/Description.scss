@@ -1,0 +1,13 @@
+.descrption{
+  font-family: 'Montserrat', sans-serif;
+  color: #737373;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  & span{
+    font-weight: 700;
+    display: block;
+  }
+}

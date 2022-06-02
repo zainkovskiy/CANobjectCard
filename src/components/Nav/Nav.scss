@@ -1,0 +1,22 @@
+.avito{
+  height: 30.75px;
+  cursor: pointer;
+  transition: transform .3s;
+  &:hover{
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(0.9);
+  }
+  &__wrap{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  &__before{
+    font-size: 12px;
+    font-family: "Montserrat",sans-serif;
+    color: #737373;
+    font-weight: 400;
+  }
+}

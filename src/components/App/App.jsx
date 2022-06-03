@@ -135,7 +135,6 @@ export class App extends Component {
                         <Reservation
                           onClose={this.openDialogReservation}
                           reqNumber={this.state.object.reqNumber}
-                          source={this.state.object.reqType}
                         />
                       </Dialog>
                     }

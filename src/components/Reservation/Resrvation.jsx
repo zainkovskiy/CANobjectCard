@@ -12,28 +12,29 @@ import './Reservation.scss';
 import axios from 'axios';
 
 export function Reservation(props) {
-  const { onClose, reqNumber, source } = props;
+  const { onClose, reqNumber } = props;
   const [loading, setLoading] = useState(false);
 
   const doReservation = async () => {
     setLoading(true)
-    // try {
-    //   const res = await axios.post('https://crm.centralnoe.ru/dealincom/factory/objectViewer.php', {
-    //     action: 'makeReservation',
-    //     id: reqNumber,
-    //     user: source,
-    //   })
-    // } catch (err) {
-    //   console.log(err);
-    // } finally {
-    //   onClose(false);
-    // }
+    try {
+      const res = await axios.post('https://crm.centralnoe.ru/dealincom/factory/objectViewer.php', {
+        action: 'makeReservation',
+        id: reqNumber,
+        user: userLogin,
+      })
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false)
+      onClose(false);
+    }
   }
 
   return (
     <>
       <DialogTitle id="scroll-dialog-title">
-        Зарезирвировать
+        Зарезервировать
       </DialogTitle>
       {
         loading ?

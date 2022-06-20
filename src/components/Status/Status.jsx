@@ -25,7 +25,7 @@ export function Status(props) {
           action: 'getPhone',
         })
         console.log(res);
-        setClientPhone(res.data.phone)
+        res?.data?.phone ? setClientPhone(res.data.phone) : setClientPhone('нет номера')
       } catch (err) {
         console.log(err);
         setClientPhone('Ошибка')
@@ -44,7 +44,10 @@ export function Status(props) {
 
   return (
     <div className="status">
-      <p className="status__row">Заявка<span>{status.reqNumber && status.reqNumber}</span></p>
+      {
+        status.reqNumber &&
+        <p className="status__row">Заявка<span>{status.reqNumber}</span></p>
+      }
       {
         source === '1c' &&
         <p
@@ -65,8 +68,14 @@ export function Status(props) {
             </span>
         }
       </p>
-      <p className="status__row">От<span>{status.created && moment(status.created).format('DD.MM.YYYY')}</span></p>
-      <p className="status__row">Статус<span>{status.reqStatus && status.reqStatus}</span></p>
+      {
+        status.created &&
+        <p className="status__row">От<span>{moment(status.created).format('DD.MM.YYYY')}</span></p>
+      }
+      {
+        status.reqStatus &&
+        <p className="status__row">Статус<span>{status.reqStatus}</span></p>
+      }
       {
         source === '1c' &&
         <p className="status__row">Риелтор

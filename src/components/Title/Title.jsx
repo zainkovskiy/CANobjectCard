@@ -26,7 +26,7 @@ export function Title(props) {
   }
 
   return (<div className='title'>
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
       <span className="title__top">
         {params.reqCity ? params.reqCity : ''} {params.reqCity && '\u00A0'}
         {params.reqStreet ? `ул.${params.reqStreet} \u00A0` : ''}

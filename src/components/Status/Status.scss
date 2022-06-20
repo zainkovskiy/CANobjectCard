@@ -1,12 +1,13 @@
 .status {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
 
   &__row {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 30%;
     margin: 0%;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -22,28 +23,34 @@
       gap: 0.5rem;
     }
   }
-  &__link{
+
+  &__link {
     color: rgb(56, 149, 255);
     cursor: pointer;
     user-select: none;
     transition: transform 0.3s;
-    &:hover{
+
+    &:hover {
       transform: scale(1.1);
     }
-    &:active{
+
+    &:active {
       transform: scale(1);
     }
   }
-  &__change{
+
+  &__change {
     display: inline-flex;
     cursor: pointer;
     border-radius: 20px;
     padding: 2px;
     transition: background-color 0.3s;
-    &:hover{
+
+    &:hover {
       background-color: #ccc;
     }
-    &:active{
+
+    &:active {
       background-color: #fff;
     }
   }

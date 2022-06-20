@@ -37,7 +37,11 @@ export function About(props) {
           about.reqKitchenArea &&
           <p className="about__top-text">Площадь кухни<span>{about.reqKitchenArea}м2</span></p>
         }
-        <p className="about__top-text">Этаж<span>{about.reqFloor && about.reqFloor}{about.reqFloorCount && `/${about.reqFloorCount}`}</span></p>
+        {
+          (about.reqTypeofRealty === 'Дом, коттедж, дача' || about.reqTypeofRealty === 'Гараж' || about.reqTypeofRealty === 'Дом') ? 
+          <p className="about__top-text">Этажность<span>{about.reqFloorCount && about.reqFloorCount}</span></p> :
+          <p className="about__top-text">Этаж<span>{about.reqFloor && about.reqFloor}{about.reqFloorCount && `/${about.reqFloorCount}`}</span></p>
+        }
       </div>
       <div className="about__bottom">
         {

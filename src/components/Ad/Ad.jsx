@@ -10,11 +10,12 @@ import './Ad.scss'
 import { Charts } from 'components/Charts'
 
 export function Ad(props) {
-  const { adPanel, adStats, reqNumber } = props;
+  const { adPanel, adStats, reqNumber, source } = props;
 
   const [charts, setCharts] = useState([]);
   const [open, setOpen] = useState(false);
   const [empty, setEmpty] = useState(false);
+  const [actionIsDisabled, setActionIsDisabled] = useState(false);
 
   const chartRef = useRef(null);
 
@@ -41,6 +42,22 @@ export function Ad(props) {
       setOpen(!open);
     }
   }
+
+  const sendActionClick = async (action) => {
+  console.log("🚀 ~ file: Ad.jsx ~ line 47 ~ sendActionClick ~ source", source)
+    try {
+      const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', {
+        "action": action,
+        "reqNumber": reqNumber,
+        "userId": userId,
+        "source": source
+      })
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setActionIsDisabled(!actionIsDisabled)
+    }
+  }
   return (
     <div className='ad'>
       <div className='ad__top'>
@@ -65,7 +82,43 @@ export function Ad(props) {
               пока нет данных
             </Button>
         }
-        <div className='ad__top-left'>
+        {
+          <div className='ad__top-wrap'>
+            <Button
+              variant="contained"
+              size='small'
+              disabled={actionIsDisabled}
+              onClick={() => { sendActionClick('isNotForSale') }}
+            >
+              нет в продаже
+            </Button>
+            <Button
+              variant="contained"
+              size='small'
+              disabled={actionIsDisabled}
+              onClick={() => { sendActionClick('isPending') }}
+            >
+              в ожидании
+            </Button>
+            <Button
+              variant="contained"
+              size='small'
+              disabled={actionIsDisabled}
+              onClick={() => { sendActionClick('isSold') }}
+            >
+              продано
+            </Button>
+            <Button
+              variant="contained"
+              size='small'
+              disabled={actionIsDisabled}
+              onClick={() => { sendActionClick('phoneIncorrect') }}
+            >
+              номер не корректный
+            </Button>
+          </div>
+        }
+        <div className='ad__top-wrap'>
           {
             adPanel.length > 0 &&
             adPanel.map((ad, idx) =>

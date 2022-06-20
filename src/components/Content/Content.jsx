@@ -62,6 +62,7 @@ export function Content(props) {
           adPanel={object.blocks.adPanel.data}
           adStats={object.blocks.adStats.isShow}
           reqNumber={object.reqNumber}
+          source={object.reqType}
         />
       }
       <About

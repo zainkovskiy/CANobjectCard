@@ -50,12 +50,12 @@ export function EditPrice(props) {
   }
 
   const handleError = (value, toggle) => {
-    if (toggle && (!value || +value <= 0)){
+    if (toggle && (!value || +value <= 0)) {
       setError(true)
       return
     }
 
-    if (disabledOverPrice && (!value || +value <= 0)){
+    if (disabledOverPrice && (!value || +value <= 0)) {
       setError(true)
     } else {
       setError(false)
@@ -64,16 +64,22 @@ export function EditPrice(props) {
 
   return (
     <div className="edit-price">
-      <TextField
-        id="outlined-basic"
-        label="Цена"
-        variant="outlined"
-        size="small"
-        value={priceNew}
-        onChange={event => setPriceNew(event.target.value)}
-        type='number'
-        disabled={disabledOverPrice}
-      />
+      <Tooltip
+        title={`${disabledOverPrice ? 'Редактирование основной цены при завышении не возможно' : ''}`}
+        arrow
+        TransitionComponent={Zoom}
+      >
+        <TextField
+          id="outlined-basic"
+          label="Цена"
+          variant="outlined"
+          size="small"
+          value={priceNew}
+          onChange={event => setPriceNew(event.target.value)}
+          type='number'
+          disabled={disabledOverPrice}
+        />
+      </Tooltip>
       <TextField
         id="outlined-basic"
         label="Цена с завышением"
@@ -81,14 +87,14 @@ export function EditPrice(props) {
         value={overStatePriceNew}
         disabled={!disabledOverPrice}
         size="small"
-        onChange={event => {setOverStatePriceNew(event.target.value), handleError(event.target.value)}}
+        onChange={event => { setOverStatePriceNew(event.target.value), handleError(event.target.value) }}
         type='number'
         error={error}
       />
       <div className="edit-price__over">
         <Switch
           checked={disabledOverPrice}
-          onClick={(event) => {setDisabledOverPrice(event.target.checked), event.target.checked ? handleError(overStatePriceNew, event.target.checked) : setError(false)}}
+          onClick={(event) => { setDisabledOverPrice(event.target.checked), event.target.checked ? handleError(overStatePriceNew, event.target.checked) : setError(false) }}
         />
         Завышение
         <Tooltip title='Стирает историю изменения цены для рекламных площадок. Объект выходит в реламу под новым номером и новой ценой. Обращаем ваше внимание, что в графе "Цена с завышением" указывается ПОЛНАЯ стоимость объекта, а не разница в цене' arrow

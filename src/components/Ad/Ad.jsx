@@ -10,7 +10,7 @@ import './Ad.scss'
 import { Charts } from 'components/Charts'
 
 export function Ad(props) {
-  const { adPanel, adStats, reqNumber, source } = props;
+  const { adPanel, adStats, reqNumber, source, realtor, reqNumberPhone, directRequest } = props;
 
   const [charts, setCharts] = useState([]);
   const [open, setOpen] = useState(false);
@@ -44,7 +44,6 @@ export function Ad(props) {
   }
 
   const sendActionClick = async (action) => {
-  console.log("🚀 ~ file: Ad.jsx ~ line 47 ~ sendActionClick ~ source", source)
     try {
       const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', {
         "action": action,
@@ -83,6 +82,7 @@ export function Ad(props) {
             </Button>
         }
         {
+          (userLogin !== realtor && reqNumberPhone) &&
           <div className='ad__top-wrap'>
             <Button
               variant="contained"
@@ -90,23 +90,26 @@ export function Ad(props) {
               disabled={actionIsDisabled}
               onClick={() => { sendActionClick('isNotForSale') }}
             >
-              нет в продаже
+              нет в продаже 
+              { directRequest.isNotForSale > 0 ? ` (${directRequest.isNotForSale})` : '' }
             </Button>
-            <Button
+            {/* <Button
               variant="contained"
               size='small'
               disabled={actionIsDisabled}
               onClick={() => { sendActionClick('isPending') }}
             >
-              в ожидании
-            </Button>
+              в ожидании 
+              { directRequest.isPending > 0 ? ` (${directRequest.isPending})` : '' }
+            </Button> */}
             <Button
               variant="contained"
               size='small'
               disabled={actionIsDisabled}
               onClick={() => { sendActionClick('isSold') }}
             >
-              продано
+              продано 
+              { directRequest.isSold > 0 ? ` (${directRequest.isSold})` : '' }
             </Button>
             <Button
               variant="contained"
@@ -115,6 +118,7 @@ export function Ad(props) {
               onClick={() => { sendActionClick('phoneIncorrect') }}
             >
               номер не корректный
+              { directRequest.phoneIncorrect > 0 ? ` (${directRequest.phoneIncorrect})` : '' }
             </Button>
           </div>
         }

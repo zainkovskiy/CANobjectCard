@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 import { Nav } from 'components/Nav'
@@ -14,6 +14,7 @@ import './Content.scss';
 
 export function Content(props) {
   const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation } = props;
+  const [ reqNumberPhone, setReqNumberPhone ] = useState(false);
   return (
     <>
       <Title
@@ -38,6 +39,7 @@ export function Content(props) {
             responsibleOpen={responsibleOpen}
             source={object.reqType}
             phone={object.params && object.params.reqPhone ? object.params.reqPhone : ''}
+            setReqNumberPhone={setReqNumberPhone}
           />
         </div>
       }
@@ -63,6 +65,9 @@ export function Content(props) {
           adStats={object.blocks.adStats.isShow}
           reqNumber={object.reqNumber}
           source={object.reqType}
+          realtor={object.realtor}
+          reqNumberPhone={reqNumberPhone}
+          directRequest={object.direct_request}
         />
       }
       <About

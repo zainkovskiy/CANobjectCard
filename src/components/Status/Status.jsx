@@ -6,7 +6,7 @@ import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import './Status.scss';
 
 export function Status(props) {
-  const { status, responsibleOpen, source, phone } = props;
+  const { status, responsibleOpen, source, phone, setReqNumberPhone } = props;
 
   const [clientPhone, setClientPhone] = useState('');
 
@@ -29,6 +29,8 @@ export function Status(props) {
       } catch (err) {
         console.log(err);
         setClientPhone('Ошибка')
+      } finally {
+        setReqNumberPhone(true);
       }
     } else {
       setClientPhone(phone)

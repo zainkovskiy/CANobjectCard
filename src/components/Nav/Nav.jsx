@@ -4,13 +4,16 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
+import { ModalWindow } from 'components/ModalWindow';  
+import { AdItem } from 'components/AdItem';  
+
 import './Nav.scss';
 
-import avito from '../../assets/image/avito.svg';
-import { display } from "@mui/system";
+import avito from 'image/avito.svg';
 
 export function Nav(props) {
   const { buttons, openDialogPhotoMaker, reqNumber, source, openDialogReservation, avitoExposure } = props;
+  const [ openAvito, setOpenAvito ] = useState(false);
 
   const [sliderWidth, setSliderWidth] = useState('');
 
@@ -18,7 +21,12 @@ export function Nav(props) {
     setSliderWidth(document.getElementById('root').clientWidth)
   }, [])
 
+  const handlerOpen = () => {
+    setOpenAvito(!openAvito)
+  }
+
   return (
+    <>
     <Box sx={{
       display: 'flex',
       justifyContent: 'space-between'
@@ -106,10 +114,20 @@ export function Nav(props) {
           className="avito"
           src={avito} 
           alt="avito" 
-          onClick={() => window.open(`https://crm.centralnoe.ru/CDB/object/card/promotion/?source=${source}&id=${btoa(reqNumber)}&IDDEAL=${dealId}`)}
+          onClick={() => handlerOpen()}
           />
         </div>
       }
     </Box>
+    <ModalWindow
+      open={openAvito}
+      onClose={handlerOpen}
+      sx='md'
+      children={<AdItem
+        reqNumber={ reqNumber }
+        onClose={handlerOpen}
+      />}
+    />
+    </>
   )
 }

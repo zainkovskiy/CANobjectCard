@@ -12,6 +12,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       components: path.resolve(__dirname, 'src', 'components'),
+      image: path.resolve(__dirname, 'src', 'assets', 'image'),
     }
   },
   devtool: 'eval-cheap-source-map',

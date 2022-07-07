@@ -50,14 +50,14 @@ export function Status(props) {
         status.reqNumber &&
         <p className="status__row">Заявка<span>{status.reqNumber}</span></p>
       }
-      {
+      {/* {
         source === '1c' &&
         <p
           className="status__row"
           onClick={() => BX.SidePanel.Instance.open(`https://crm.centralnoe.ru/crm/deal/details/${status.deal ? status.deal : dealId}/`, { animationDuration: 300, width: sliderWidth, })}
         >Сделка<span className="status__link">{status.deal ? status.deal : dealId}</span>
         </p>
-      }
+      } */}
       <p className="status__row">Клиент
         {
           clientPhone ?

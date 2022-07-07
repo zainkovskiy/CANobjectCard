@@ -23,4 +23,15 @@
     background-repeat: no-repeat;
     cursor: pointer;
   }
+  &__text{
+    font-family: 'Montserrat', sans-serif;
+    color: #737373;
+    letter-spacing: 0.8px;
+    &_small{
+      font-size: 11px;
+    }
+    &_error{
+      color: red;
+    }
+  }
 }

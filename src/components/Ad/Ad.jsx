@@ -82,7 +82,7 @@ export function Ad(props) {
             </Button>
         }
         {
-          (userLogin !== realtor && reqNumberPhone) &&
+          // (userLogin !== realtor && reqNumberPhone) &&
           <div className='ad__top-wrap'>
             <Button
               variant="contained"
@@ -90,8 +90,8 @@ export function Ad(props) {
               disabled={actionIsDisabled}
               onClick={() => { sendActionClick('isNotForSale') }}
             >
-              нет в продаже 
-              { directRequest.isNotForSale > 0 ? ` (${directRequest.isNotForSale})` : '' }
+              нет в продаже
+              {directRequest.isNotForSale > 0 ? ` (${directRequest.isNotForSale})` : ''}
             </Button>
             {/* <Button
               variant="contained"
@@ -108,8 +108,8 @@ export function Ad(props) {
               disabled={actionIsDisabled}
               onClick={() => { sendActionClick('isSold') }}
             >
-              продано 
-              { directRequest.isSold > 0 ? ` (${directRequest.isSold})` : '' }
+              продано
+              {directRequest.isSold > 0 ? ` (${directRequest.isSold})` : ''}
             </Button>
             <Button
               variant="contained"
@@ -118,7 +118,7 @@ export function Ad(props) {
               onClick={() => { sendActionClick('phoneIncorrect') }}
             >
               номер не корректный
-              { directRequest.phoneIncorrect > 0 ? ` (${directRequest.phoneIncorrect})` : '' }
+              {directRequest.phoneIncorrect > 0 ? ` (${directRequest.phoneIncorrect})` : ''}
             </Button>
           </div>
         }
@@ -128,9 +128,9 @@ export function Ad(props) {
             adPanel.map((ad, idx) =>
               <Tooltip title='Нажмите чтобы перейти по ссылке' arrow
                 TransitionComponent={Zoom}
+                key={idx}
               >
                 <a
-                  key={idx}
                   className='ad__link'
                   href={ad.URL}
                   style={{ backgroundImage: `url(${ad.logo})` }}

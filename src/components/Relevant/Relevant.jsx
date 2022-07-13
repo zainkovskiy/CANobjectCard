@@ -51,9 +51,19 @@ export function Relevant(props) {
       </DialogTitle>
       <DialogContent>
         {
-          <span className='relevant__text'>ФИО клиента: { client?.name || 'ФИО отсутвует' }</span>
+          <p className='relevant__text relevant__title'>
+            ФИО клиента:
+            <span>
+              {client?.name && client?.name !== 'Неуказано Нино Не указано' ? ` ${client?.name}` : ' ФИО отсутствует'}
+            </span>
+          </p>
         }
-        <span className='relevant__text'>Номер клиента: { phone || client?.phone ? phone || client?.phone : 'номер отсутсвует' }</span>
+        <p className='relevant__text relevant__title'>
+          Номер клиента:
+          <span>
+            {phone || client?.phone ? ` ${phone || client?.phone}` : ' номер отсутствует'}
+          </span>
+        </p>
         <p className="relevant__text">
           Пожалуйста, после звонка укажите статус объявления
         </p>

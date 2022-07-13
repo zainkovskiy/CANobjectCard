@@ -34,24 +34,27 @@ export function Status(props) {
         <p className="status__row">Заявка<span>{status.reqNumber}</span></p>
       }
       {
-        source === '1c' &&
+        (source === '1c' && status?.deal) &&
         <p
           className="status__row"
           onClick={() => BX.SidePanel.Instance.open(`https://crm.centralnoe.ru/crm/deal/details/${status.deal ? status.deal : dealId}/`, { animationDuration: 300, width: sliderWidth, })}
         >Сделка<span className="status__link">{status.deal ? status.deal : dealId}</span>
         </p>
       }
-      <p className="status__row">Клиент
-        <span
-          className="status__link"
-          onClick={handlerOpenClientPhone}
-        >
-          Показать номер
-        </span>
-      </p>
+      {
+        status?.client?.isShow &&
+        <p className="status__row">Клиент
+          <span
+            className="status__link"
+            onClick={handlerOpenClientPhone}
+          >
+            Показать номер
+          </span>
+        </p>
+      }
       {
         status.created &&
-        <p className="status__row">Актуализированно<span>{moment(status.created).format('DD.MM.YYYY')}</span></p>
+        <p className="status__row">Актуализировано<span>{moment(status.created).format('DD.MM.YYYY')}</span></p>
       }
       {
         status.reqStatus &&

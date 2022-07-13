@@ -1,6 +1,12 @@
-.relevant__text{
+.relevant__title{
   font-family: 'Montserrat';
-  display: block;
+}
+
+.relevant__title{
+  margin: 0;
+  & span{
+    font-weight: 700;
+  }
 }
 
 .relevant__buttons{

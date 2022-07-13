@@ -160,7 +160,7 @@ export function AdItem(props) {
                         <span className='ad__text'>Реклама на площадке {ad.price}&#8381;</span>
                         {
                           (ad?.expiration && ad?.isOnline) &&
-                          <span className='ad__text ad__text_small'>Срок размещения до {moment().locale('ru').format('DD MMMM YYYY')}</span>
+                          <span className='ad__text ad__text_small'>Срок размещения до {moment(ad.expiration).locale('ru').format('DD MMMM YYYY')}</span>
                         }
                       </div>
                       <Button
@@ -174,7 +174,9 @@ export function AdItem(props) {
                         {ad.isOnline ? 'Выключить' : 'Включить'}
                       </Button>
                     </div>
-                    <div className={`ad-modal__options ${ad?.hasOption || !ad?.isOnline ? 'ad-modal_disabled' : ''}`}>
+                    <div className={`ad-modal__options 
+                    // ${ad?.hasOption || !ad?.isOnline ? 'ad-modal_disabled' : ''}`}
+                    >
                       {
                         ad?.option.length > 0 &&
                         ad.option.map(option =>

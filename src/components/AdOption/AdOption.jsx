@@ -19,8 +19,11 @@ export function AdOption(props) {
       {
         option.type === 'check' &&
         <FormControlLabel
-          sx={{ margin: 0 }}
-          label={option.name}
+          sx={{
+            margin: 0,
+            color: `${option.status ? 'green' : ''}`
+          }}
+          label={option.status ? `${option.name} Включена` : `${option.name}`}
           labelPlacement='end'
           control={<Switch
             disabled={balance - option.cost <= 0 || (selectOption && selectOption?.name !== option.name)}
@@ -32,8 +35,12 @@ export function AdOption(props) {
       {
         option.type === 'select' &&
         <FormControlLabel
-          sx={{ margin: 0, width: '100%' }}
-          label={option.name}
+          sx={{
+            margin: 0,
+            width: '100%',
+            color: `${option.status ? 'green' : ''}`
+          }}
+          label={option.status ? `${option.name} Включена` : `${option.name}`}
           labelPlacement='top'
           control={
             <Select

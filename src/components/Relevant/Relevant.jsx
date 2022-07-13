@@ -9,7 +9,7 @@ import './Relevant.scss'
 
 export function Relevant(props) {
   const { clientUID, phone, directRequest, onClose } = props;
-  const [ clientPhone, setClientPhone ] = useState(phone || '');
+  const [client, setClient] = useState(null);
 
   useEffect(() => {
     if (Boolean(phone)) {
@@ -19,16 +19,14 @@ export function Relevant(props) {
   }, [])
 
   const getPhone = async () => {
-    setClientPhone('Загрузка номера...');
     try {
       const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', {
         UID: clientUID,
         action: 'getPhone',
       })
-      res?.data?.phone ? setClientPhone(res.data.phone) : setClientPhone('Нет номера')
+      res?.data && setClient(res.data)
     } catch (err) {
       console.log(err);
-      setClientPhone('Ошибка')
     }
   }
 
@@ -52,7 +50,10 @@ export function Relevant(props) {
         Актуализация
       </DialogTitle>
       <DialogContent>
-        <span className='relevant__text'>Номер клиента: {clientPhone}</span>
+        {
+          <span className='relevant__text'>ФИО клиента: { client?.name || 'ФИО отсутвует' }</span>
+        }
+        <span className='relevant__text'>Номер клиента: { phone || client?.phone ? phone || client?.phone : 'номер отсутсвует' }</span>
         <p className="relevant__text">
           Пожалуйста, после звонка укажите статус объявления
         </p>

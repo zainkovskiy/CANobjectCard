@@ -51,6 +51,8 @@ export function AdItem(props) {
     } catch (err) {
       console.log(err)
       setError(true);
+    } finally{
+      onClose()
     }
   }
 

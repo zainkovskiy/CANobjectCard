@@ -51,7 +51,7 @@ export function Status(props) {
       </p>
       {
         status.created &&
-        <p className="status__row">От<span>{moment(status.created).format('DD.MM.YYYY')}</span></p>
+        <p className="status__row">Актуализированно<span>{moment(status.created).format('DD.MM.YYYY')}</span></p>
       }
       {
         status.reqStatus &&

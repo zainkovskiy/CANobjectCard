@@ -127,7 +127,7 @@ export function AdItem(props) {
     <>
       {
         error ?
-          <span className="ad__text">Что то пошло не так...</span> :
+          <span className="ad__text" style={{ padding: '1rem' }}>Что то пошло не так...</span> :
           <>
             <DialogTitle>
               <div className='ad-modal__wrap'>

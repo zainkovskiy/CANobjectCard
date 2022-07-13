@@ -1,40 +1,23 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import axios from 'axios';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
+import Dialog from '@mui/material/Dialog';
+import { Relevant } from 'components/Relevant';
 
 import './Status.scss';
 
 export function Status(props) {
-  const { status, responsibleOpen, source, phone, setReqNumberPhone } = props;
+  const { status, responsibleOpen, source, phone, directRequest } = props;
 
-  const [clientPhone, setClientPhone] = useState('');
-
+  const [showClientPhone, setShowClientPhone] = useState(false);
   const [sliderWidth, setSliderWidth] = useState('');
 
   useEffect(() => {
     setSliderWidth(document.getElementById('root').clientWidth)
   }, [])
 
-  const getPhone = async () => {
-    setClientPhone('Загрузка номера...');
-    if (source === '1c') {
-      try {
-        const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', {
-          UID: status.client.UID,
-          action: 'getPhone',
-        })
-        console.log(res);
-        res?.data?.phone ? setClientPhone(res.data.phone) : setClientPhone('нет номера')
-      } catch (err) {
-        console.log(err);
-        setClientPhone('Ошибка')
-      } finally {
-        setReqNumberPhone(true);
-      }
-    } else {
-      setClientPhone(phone)
-    }
+  const handlerOpenClientPhone = () => {
+    setShowClientPhone(!showClientPhone)
   }
 
   const openRealtor = (realtor) => {
@@ -50,25 +33,21 @@ export function Status(props) {
         status.reqNumber &&
         <p className="status__row">Заявка<span>{status.reqNumber}</span></p>
       }
-      {/* {
+      {
         source === '1c' &&
         <p
           className="status__row"
           onClick={() => BX.SidePanel.Instance.open(`https://crm.centralnoe.ru/crm/deal/details/${status.deal ? status.deal : dealId}/`, { animationDuration: 300, width: sliderWidth, })}
         >Сделка<span className="status__link">{status.deal ? status.deal : dealId}</span>
         </p>
-      } */}
+      }
       <p className="status__row">Клиент
-        {
-          clientPhone ?
-            <span>{clientPhone}</span> :
-            <span
-              className="status__link"
-              onClick={() => getPhone()}
-            >
-              {(status.client && status.client.isShow) && 'Показать номер'}
-            </span>
-        }
+        <span
+          className="status__link"
+          onClick={handlerOpenClientPhone}
+        >
+          Показать номер
+        </span>
       </p>
       {
         status.created &&
@@ -99,6 +78,19 @@ export function Status(props) {
           </span>
         </p>
       }
+      <Dialog
+        open={showClientPhone}
+        onClose={handlerOpenClientPhone}
+        maxWidth={'md'}
+        fullWidth={true}
+      >
+        <Relevant
+          clientUID={status.client.UID}
+          phone={phone}
+          directRequest={directRequest}
+          onClose={handlerOpenClientPhone}
+        />
+      </Dialog>
     </div>
   )
 }

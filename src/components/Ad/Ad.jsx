@@ -10,12 +10,11 @@ import './Ad.scss'
 import { Charts } from 'components/Charts'
 
 export function Ad(props) {
-  const { adPanel, adStats, reqNumber, source, realtor, reqNumberPhone, directRequest } = props;
+  const { adPanel, adStats, reqNumber } = props;
 
   const [charts, setCharts] = useState([]);
   const [open, setOpen] = useState(false);
   const [empty, setEmpty] = useState(false);
-  const [actionIsDisabled, setActionIsDisabled] = useState(false);
 
   const chartRef = useRef(null);
 
@@ -43,20 +42,6 @@ export function Ad(props) {
     }
   }
 
-  const sendActionClick = async (action) => {
-    try {
-      const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', {
-        "action": action,
-        "reqNumber": reqNumber,
-        "userId": userId,
-        "source": source
-      })
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setActionIsDisabled(!actionIsDisabled)
-    }
-  }
   return (
     <div className='ad'>
       <div className='ad__top'>
@@ -80,47 +65,6 @@ export function Ad(props) {
             >
               пока нет данных
             </Button>
-        }
-        {
-          // (userLogin !== realtor && reqNumberPhone) &&
-          <div className='ad__top-wrap'>
-            <Button
-              variant="contained"
-              size='small'
-              disabled={actionIsDisabled}
-              onClick={() => { sendActionClick('isNotForSale') }}
-            >
-              нет в продаже
-              {directRequest.isNotForSale > 0 ? ` (${directRequest.isNotForSale})` : ''}
-            </Button>
-            {/* <Button
-              variant="contained"
-              size='small'
-              disabled={actionIsDisabled}
-              onClick={() => { sendActionClick('isPending') }}
-            >
-              в ожидании 
-              { directRequest.isPending > 0 ? ` (${directRequest.isPending})` : '' }
-            </Button> */}
-            <Button
-              variant="contained"
-              size='small'
-              disabled={actionIsDisabled}
-              onClick={() => { sendActionClick('isSold') }}
-            >
-              продано
-              {directRequest.isSold > 0 ? ` (${directRequest.isSold})` : ''}
-            </Button>
-            <Button
-              variant="contained"
-              size='small'
-              disabled={actionIsDisabled}
-              onClick={() => { sendActionClick('phoneIncorrect') }}
-            >
-              номер не корректный
-              {directRequest.phoneIncorrect > 0 ? ` (${directRequest.phoneIncorrect})` : ''}
-            </Button>
-          </div>
         }
         <div className='ad__top-wrap'>
           {
@@ -155,9 +99,6 @@ export function Ad(props) {
           </motion.div>
         }
       </AnimatePresence>
-      {/* // } */}
     </div>
   )
 }
-
-// const outRight = styled.div`animation: 2s ${keyframes`${fadeOutRightBig}`}`; 

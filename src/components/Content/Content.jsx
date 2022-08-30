@@ -54,7 +54,7 @@ export function Content(props) {
           />
         </div>
         <div>
-          <Photo images={object.images.length > 0 ? object.images : [{ url: 'https://crm.centralnoe.ru/dealincom/assets/img/placeholder.png'}]} />
+          <Photo images={object.images.length > 0 ? object.images : [{ url: 'https://crm.centralnoe.ru/dealincom/assets/img/placeholder.png' }]} />
         </div>
       </motion.div>
       {

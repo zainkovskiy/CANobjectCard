@@ -3,7 +3,7 @@ import './About.scss';
 
 export function About(props) {
   const { about, source } = props;
-  
+
   return (
     <div className="about">
       <div className="about__top">
@@ -25,7 +25,7 @@ export function About(props) {
           }
           <span>{about.reqPrice && about.reqPrice} т. руб.</span></p> */}
         {
-          about.reqTypeofRealty === 'Земельный участок' ?
+          about.reqTypeofRealty === 'Земельный участок' || about.reqTypeofRealty === 'Участок' ?
             <p className="about__top-text">Площадь участка<span>{about.reqLandArea && about.reqLandArea} соток</span></p> :
             <p className="about__top-text">Общая площадь<span>{about.reqFlatTotalArea && about.reqFlatTotalArea}м2</span></p>
         }
@@ -38,9 +38,9 @@ export function About(props) {
           <p className="about__top-text">Площадь кухни<span>{about.reqKitchenArea}м2</span></p>
         }
         {
-          (about.reqTypeofRealty === 'Дом, коттедж, дача' || about.reqTypeofRealty === 'Гараж' || about.reqTypeofRealty === 'Дом') ? 
-          <p className="about__top-text">Этажность<span>{about.reqFloorCount && about.reqFloorCount}</span></p> :
-          <p className="about__top-text">Этаж<span>{about.reqFloor && about.reqFloor}{about.reqFloorCount && `/${about.reqFloorCount}`}</span></p>
+          (about.reqTypeofRealty === 'Дом, коттедж, дача' || about.reqTypeofRealty === 'Гараж' || about.reqTypeofRealty === 'Дом') ?
+            <p className="about__top-text">Этажность<span>{about.reqFloorCount && about.reqFloorCount}</span></p> :
+            <p className="about__top-text">Этаж<span>{about.reqFloor && about.reqFloor}{about.reqFloorCount && `/${about.reqFloorCount}`}</span></p>
         }
       </div>
       <div className="about__bottom">
@@ -73,7 +73,7 @@ export function About(props) {
           <p className="about__bottom-text">{about.nearMetro}<span>{about.metroDistance && (+about.metroDistance).toFixed(3) * 1000} метров</span></p>
         }
         {
-          (about.reqTypeofRealty !== 'Земельный участок' && about.reqPrice && about.reqFlatTotalArea) &&
+          (about.reqTypeofRealty !== 'Земельный участок' && about.reqTypeofRealty !== 'Участок' && about.reqPrice && about.reqFlatTotalArea) &&
           <p className="about__bottom-text">Стоимость кв.м.<span>{((+about.reqPrice / +about.reqFlatTotalArea) * 1000).toFixed(0)} руб.</span></p>
         }
         {
@@ -115,6 +115,42 @@ export function About(props) {
         {
           (source === 'mlsn') &&
           <p className="about__bottom-text">Рассрочка<span>{about.buildingInstallment ? 'да' : 'нет'}</span></p>
+        }
+        {
+          (source === 'ads' && about.garageType === 'Гараж') &&
+          <>
+            {
+              about.garageSubType &&
+              <p className="about__bottom-text">Рассрочка<span>{about.garageSubType}</span></p>
+            }
+          </>
+        }
+        {
+          (source === 'ads' && about.garageType === 'Гараж') &&
+          <>
+            {
+              (about.reqPolice && about.reqPolice === '1') &&
+              <p className="about__bottom-text">Охрана<span>Есть</span></p>
+            }
+          </>
+        }
+        {
+          (source === 'ads' && about.reqTypeofRealty === 'Участок') &&
+          <>
+            {
+              about.reqLandType &&
+              <p className="about__bottom-text">Назначение земли<span>{about.reqLandType}</span></p>
+            }
+          </>
+        }
+        {
+          (source === 'ads' && about.reqTypeofRealty === 'Дом') &&
+          <>
+            {
+              about.typeOfHouse &&
+              <p className="about__bottom-text">Тип дома<span>{about.typeOfHouse}</span></p>
+            }
+          </>
         }
       </div>
     </div>

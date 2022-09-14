@@ -5,15 +5,15 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
-    path: path.resolve(__dirname, 'dist', 'v2.3.3'),
-    filename: 'bundle-v2.3.3.js',
+    path: path.resolve(__dirname, 'dist', 'v2.4'),
+    filename: 'bundle-v2.4.js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
       components: path.resolve(__dirname, 'src', 'components'),
       image: path.resolve(__dirname, 'src', 'assets', 'image'),
-    }
+    },
   },
   devtool: 'eval-cheap-source-map',
   module: {
@@ -31,9 +31,9 @@ module.exports = {
             loader: 'css-loader',
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|ttf|eot)$/,
@@ -43,9 +43,9 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'accets/fonts',
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -55,11 +55,11 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'accets/images',
-            }
-          }
-        ]
-      }
-    ]
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new htmlWebpackPlugin({
@@ -67,7 +67,7 @@ module.exports = {
       filename: 'index.html',
     }),
     new miniCssExtractPlugin({
-      filename: 'main-v2.3.3.css'
-    })
-  ]
-}
+      filename: 'main-v2.4.css',
+    }),
+  ],
+};

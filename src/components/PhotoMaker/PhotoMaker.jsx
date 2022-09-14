@@ -17,47 +17,44 @@ export function PhotoMaker(props) {
   const sendComment = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('https://crm.centralnoe.ru/dealincom/factory/notifyMaker.php', {
-        action: 'makePhotoCall',
-        id: reqNumber,
-        user: userLogin,
-        comment: comment.replace(/\n/g, ' '),
-      })
+      const res = await axios.post(
+        'https://crm.centralnoe.ru/dealincom/factory/notifyMaker.php',
+        {
+          action: 'makePhotoCall',
+          id: reqNumber,
+          user: userLogin,
+          comment: comment.replace(/\n/g, ' '),
+        }
+      );
     } catch (err) {
       console.log(err);
     } finally {
       setLoading(false);
       onClose(false);
     }
-  }
+  };
 
   return (
     <>
-      <DialogTitle id="scroll-dialog-title">
-        Заказ фотографа
-      </DialogTitle>
+      <DialogTitle id='scroll-dialog-title'>Заказ фотографа</DialogTitle>
       <DialogContent>
-        <span
-          className='photo-text'
-        >
-          С помощью данной формы Вы можете заказать фотографа для фотосъёмки объекта клиента. Для заказа фотографа напишите комментарий для фотографа, с указанием желательной даты посещения, и любой другой уточняющей информации и нажмите кнопку "ЗАКАЗАТЬ"
+        <span className='photo-text'>
+          С помощью данной формы Вы можете заказать фотографа для фотосъёмки
+          объекта клиента. Для заказа фотографа напишите комментарий для
+          фотографа, с указанием желательной даты посещения, и любой другой
+          уточняющей информации и нажмите кнопку "ЗАКАЗАТЬ"
         </span>
         <textarea
-          class="photo-comment"
-          cols="30"
-          rows="10"
+          className='photo-comment'
+          cols='30'
+          rows='10'
           value={comment}
-          onChange={event => setComment(event.target.value)}
+          onChange={(event) => setComment(event.target.value)}
           placeholder='Введите комментарий'
-        >
-        </textarea>
+        ></textarea>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={onClose}
-        >
-          отменить
-        </Button>
+        <Button onClick={onClose}>отменить</Button>
         <LoadingButton
           disabled={comment.length === 0}
           onClick={() => sendComment()}
@@ -67,5 +64,5 @@ export function PhotoMaker(props) {
         </LoadingButton>
       </DialogActions>
     </>
-  )
+  );
 }

@@ -164,6 +164,15 @@ export function Relevant(props) {
                   отложена
                   {directRequest.isPending > 0 ? ` (${directRequest.isPending})` : ''}
                 </Button>
+                <Button
+                  variant="contained"
+                  size='small'
+                  fullWidth
+                  onClick={() => { sendActionClick('dontPickUp') }}
+                >
+                  не взял трубку
+                  {directRequest.dontPickUp > 0 ? ` (${directRequest.dontPickUp})` : ''}
+                </Button>
               </div>
             </>
         }

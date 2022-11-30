@@ -12,18 +12,19 @@
 // }
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-body{
+body {
   margin: 0;
   background-color: #fff;
   // scrollbar-width: none;
   // overflow: auto;
 }
+
 // body::-webkit-scrollbar {
 //   width: 0;
 //   height: 0;
 // }
 
-#root{
+#root {
   // max-width: 920px;
   margin: 0 auto;
   display: flex;
@@ -31,10 +32,23 @@ body{
   gap: 1rem;
   padding: 1rem;
 }
-.error{
+
+.error {
   font-family: 'Montserrat', sans-serif;
   color: red;
   font-size: 18px;
   letter-spacing: 0.8px;
   font-weight: 400;
+}
+
+.link {
+  text-decoration: none;
+  color: #0b54a0;
+  transition: transform .3s;
+  &:hover{
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(0.9);
+  }
 }

@@ -81,8 +81,22 @@ export function About(props) {
           <p className="about__bottom-text">Застройщик<span>{about.blockBuilderName}</span></p>
         }
         {
-          (source === 'mlsn' && about.reqResidentialComplex) &&
-          <p className="about__bottom-text">ЖК<span>{about.reqResidentialComplex}</span></p>
+          (source === 'mlsn' && about?.devPhone) &&
+          <p className="about__bottom-text">
+            Телфон застройщика
+            <a className="link" href={`tel:${about?.devPhone}`}>{about?.devPhone}</a>
+          </p>
+        }
+        {
+          (source === 'mlsn' && about?.reqResidentialComplex) &&
+          <p className="about__bottom-text">
+            ЖК
+            {
+              about?.urlComplex ?
+                <a className="link" href={about?.urlComplex}>{about?.reqResidentialComplex}</a> :
+                <span>{about?.reqResidentialComplex}</span>
+            }
+          </p>
         }
         {
           (source === 'mlsn' && about.reqHeight) &&

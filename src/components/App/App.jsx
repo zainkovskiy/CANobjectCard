@@ -64,10 +64,10 @@ export class App extends Component {
         'https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php',
         {
           action: 'get',
-          // reqNumber: 56059000179,
+          // reqNumber: 2799,
           // userId: 2921,
           // userLogin: 'zainkovskiyaa',
-          // source: '1c',
+          // source: 'mlsn',
           reqNumber: reqNumber,
           userId: userId,
           userLogin: userLogin,

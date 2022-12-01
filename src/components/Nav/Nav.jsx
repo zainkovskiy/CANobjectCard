@@ -96,7 +96,7 @@ export function Nav(props) {
               size='small'
               onClick={() =>
                 BX.SidePanel.Instance.open(
-                  `https://crm.centralnoe.ru/booking/index.php?dealId=${dealId}?reqNumber=${reqNumber}`,
+                  `https://crm.centralnoe.ru/booking/index.php?dealId=${dealId}&reqNumber=${reqNumber}`,
                   { animationDuration: 300, width: sliderWidth }
                 )
               }

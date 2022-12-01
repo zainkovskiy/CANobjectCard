@@ -93,7 +93,7 @@ export function About(props) {
             ЖК
             {
               about?.urlComplex ?
-                <a className="link" href={about?.urlComplex}>{about?.reqResidentialComplex}</a> :
+                <a className="link" target='_blank' href={about?.urlComplex}>{about?.reqResidentialComplex}</a> :
                 <span>{about?.reqResidentialComplex}</span>
             }
           </p>

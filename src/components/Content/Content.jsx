@@ -18,20 +18,23 @@ export function Content(props) {
     <>
       <Title
         params={object.params}
-        editBtnShow={object.blocks.buttons.edit}
+        editBtnShow={object?.blocks?.buttons?.edit || false}
         setNewPrice={setNewPrice}
         reqNumber={object.reqNumber}
       />
-      <Nav
+      {
+        object?.blocks?.buttons &&
+        <Nav
         buttons={object.blocks.buttons}
         openDialogPhotoMaker={openDialogPhotoMaker}
         openDialogReservation={openDialogReservation}
         reqNumber={object.reqNumber}
         source={object.reqType}
         avitoExposure={object.avitoExposure}
-      />
+        />
+      }
       {
-        object.blocks.header.isShow &&
+        object?.blocks?.header?.isShow &&
         <div>
           <Status
             status={object.blocks.header}
@@ -54,7 +57,7 @@ export function Content(props) {
           />
         </div>
         <div>
-          <Photo images={object.images.length > 0 ? object.images : [{ url: 'https://crm.centralnoe.ru/dealincom/assets/img/placeholder.png' }]} />
+          <Photo images={object?.images?.length > 0 ? object.images : [{ url: 'https://crm.centralnoe.ru/dealincom/assets/img/placeholder.png' }]} />
         </div>
       </motion.div>
       {
@@ -71,7 +74,7 @@ export function Content(props) {
         source={object.reqType}
       />
       <Description
-        comment={object.params.reqComment}
+        comment={object?.params?.reqComment || ''}
       />
     </>
   )

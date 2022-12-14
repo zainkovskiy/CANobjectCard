@@ -83,8 +83,15 @@ export function About(props) {
         {
           (source === 'mlsn' && about?.devPhone) &&
           <p className="about__bottom-text">
-            Телфон застройщика
+            Телефон застройщика
             <a className="link" href={`tel:${about?.devPhone}`}>{about?.devPhone}</a>
+          </p>
+        }
+        {
+          (source === 'mlsn' && about?.comission) &&
+          <p className="about__bottom-text">
+            Комиссия агента
+            <span>{about.comission} &#8381;</span>
           </p>
         }
         {

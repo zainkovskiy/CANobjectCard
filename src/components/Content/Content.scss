@@ -4,3 +4,20 @@
   grid-gap: 0.5rem;
   justify-content: space-between;
 }
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 30%;
+  gap: 0.5rem;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.right-panel{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 
 import { Nav } from 'components/Nav'
 import { Title } from 'components/Title';
@@ -11,6 +10,7 @@ import { About } from 'components/About';
 import { Description } from "components/Description";
 
 import './Content.scss';
+import { Button } from "@mui/material";
 
 export function Content(props) {
   const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation } = props;
@@ -25,57 +25,57 @@ export function Content(props) {
       {
         object?.blocks?.buttons &&
         <Nav
-        buttons={object.blocks.buttons}
-        openDialogPhotoMaker={openDialogPhotoMaker}
-        openDialogReservation={openDialogReservation}
-        reqNumber={object.reqNumber}
-        source={object.reqType}
-        avitoExposure={object.avitoExposure}
+          buttons={object.blocks.buttons}
+          openDialogPhotoMaker={openDialogPhotoMaker}
+          openDialogReservation={openDialogReservation}
+          reqNumber={object.reqNumber}
+          source={object.reqType}
+          avitoExposure={object.avitoExposure}
         />
       }
-      {
-        object?.blocks?.header?.isShow &&
-        <div>
-          <Status
-            status={object.blocks.header}
-            responsibleOpen={responsibleOpen}
+      <div className="wrapper">
+        <div className="main">
+          <Photo images={object?.images?.length > 0 ? object.images : [{ url: 'https://crm.centralnoe.ru/dealincom/assets/img/placeholder.png' }]} />
+          {
+            object.blocks.adPanel.isShow &&
+            <Ad
+              adPanel={object.blocks.adPanel.data}
+              adStats={object.blocks.adStats.isShow}
+              reqNumber={object.reqNumber}
+              source={object.reqType}
+            />
+          }
+          <About
+            about={object.params}
             source={object.reqType}
-            phone={object?.params && object?.params?.reqPhone ? object.params.reqPhone : ''}
-            directRequest={object.direct_request}
+          />
+          <Description
+            comment={object?.params?.reqComment || ''}
           />
         </div>
-      }
-      <motion.div
-        className="content__grid"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div>
+        <div className="right-panel">
+          {
+            object?.blocks?.header?.isShow &&
+            <Status
+              status={object.blocks.header}
+              responsibleOpen={responsibleOpen}
+              source={object.reqType}
+              phone={object?.params && object?.params?.reqPhone ? object.params.reqPhone : ''}
+              directRequest={object.direct_request}
+            />
+          }
           <Cords
             cords={(object.blocks.map.lat && object.blocks.map.lng) ? [object.blocks.map.lat, object.blocks.map.lng] : []}
           />
+          <Button
+            size="small"
+            fullWidth
+            variant="contained"
+          >
+            Чат
+          </Button>
         </div>
-        <div>
-          <Photo images={object?.images?.length > 0 ? object.images : [{ url: 'https://crm.centralnoe.ru/dealincom/assets/img/placeholder.png' }]} />
-        </div>
-      </motion.div>
-      {
-        object.blocks.adPanel.isShow &&
-        <Ad
-          adPanel={object.blocks.adPanel.data}
-          adStats={object.blocks.adStats.isShow}
-          reqNumber={object.reqNumber}
-          source={object.reqType}
-        />
-      }
-      <About
-        about={object.params}
-        source={object.reqType}
-      />
-      <Description
-        comment={object?.params?.reqComment || ''}
-      />
+      </div>
     </>
   )
 }

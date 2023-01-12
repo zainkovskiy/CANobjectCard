@@ -45,14 +45,12 @@
     }
   }
   &__bottom{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
     &-text{
       margin: 0;
       font-size: 12px;
-      width: 30%;
       display: flex;
       justify-content: space-between;
       border-bottom: 1px dashed #737373;

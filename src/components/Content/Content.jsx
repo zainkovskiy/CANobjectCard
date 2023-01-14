@@ -3,7 +3,7 @@ import React from "react";
 import { Nav } from 'components/Nav'
 import { Title } from 'components/Title';
 import { Photo } from 'components/Photo';
-import { Cords } from 'components/Cords';
+import { StatusBar } from 'components/StatusBar';
 import { Status } from 'components/Status';
 import { Ad } from 'components/Ad';
 import { About } from 'components/About';
@@ -13,9 +13,10 @@ import './Content.scss';
 import { Button } from "@mui/material";
 
 export function Content(props) {
-  const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation } = props;
+  const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation, isShowChat, isShowMap } = props;
   return (
     <>
+    <StatusBar/>
       <Title
         params={object.params}
         editBtnShow={object?.blocks?.buttons?.edit || false}
@@ -64,13 +65,22 @@ export function Content(props) {
               directRequest={object.direct_request}
             />
           }
-          <Cords
+          {/* <Cords
             cords={(object.blocks.map.lat && object.blocks.map.lng) ? [object.blocks.map.lat, object.blocks.map.lng] : []}
-          />
+          /> */}
+          <Button
+            size="small"
+            fullWidth
+            variant="outlined"
+            onClick={isShowMap}
+          >
+            Показать на карте
+          </Button>
           <Button
             size="small"
             fullWidth
             variant="contained"
+            onClick={isShowChat}
           >
             Чат
           </Button>

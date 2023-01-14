@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Dialog from '@mui/material/Dialog';
 import axios from 'axios';
+import { AnimatePresence } from 'framer-motion';
+
 
 import './App.scss';
 
@@ -9,6 +11,8 @@ import { Content } from 'components/Content';
 import { Responsible } from 'components/Responsible';
 import { PhotoMaker } from 'components/PhotoMaker';
 import { Reservation } from 'components/Reservation';
+import { Chat } from 'components/Chat';
+import { Cords } from 'components/Cords';
 
 export class App extends Component {
   state = {
@@ -18,6 +22,8 @@ export class App extends Component {
     responsibleOpen: false,
     photoMaker: false,
     reservation: false,
+    openChat: false,
+    openMap: false,
   };
   openSelectResponsible = () => {
     this.setState({ responsibleOpen: !this.state.responsibleOpen });
@@ -27,6 +33,12 @@ export class App extends Component {
   };
   openDialogReservation = () => {
     this.setState({ reservation: !this.state.reservation });
+  };
+  isShowChat = () => {
+    this.setState({ openChat: !this.state.openChat });
+  };
+  isShowMap = () => {
+    this.setState({ openMap: !this.state.openMap });
   };
 
   setNewPrice = (price, owerState, owerPrice) => {
@@ -106,7 +118,17 @@ export class App extends Component {
                   setNewPrice={this.setNewPrice}
                   openDialogPhotoMaker={this.openDialogPhotoMaker}
                   openDialogReservation={this.openDialogReservation}
+                  isShowChat={this.isShowChat}
+                  isShowMap={this.isShowMap}
                 />
+                <AnimatePresence>
+                  {
+                    this.state.openChat &&
+                    <Chat
+                      isShowChat={this.isShowChat}
+                    />
+                  }
+                </AnimatePresence>
                 {this.state.responsibleOpen && (
                   <Dialog
                     open={this.state.responsibleOpen}
@@ -117,6 +139,19 @@ export class App extends Component {
                     <Responsible
                       onClose={this.openSelectResponsible}
                       setNewResponsible={this.setNewResponsible}
+                    />
+                  </Dialog>
+                )}
+                {this.state.openMap && (
+                  <Dialog
+                    open={this.state.openMap}
+                    onClose={this.isShowMap}
+                    maxWidth={'lg'}
+                    fullWidth={true}
+                  >
+                    <Cords
+                      onClose={this.isShowMap}
+                      cords={(this.state.object.blocks.map.lat && this.state.object.blocks.map.lng) ? [this.state.object.blocks.map.lat, this.state.object.blocks.map.lng] : []}
                     />
                   </Dialog>
                 )}

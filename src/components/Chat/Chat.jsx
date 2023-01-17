@@ -6,21 +6,22 @@ import DialogActions from '@mui/material/DialogActions';
 import { Button, IconButton } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
-import styled from 'styled-components';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import { ChatMessage } from 'components/ChatMessage';
-import { getChat } from '../../Api';
+import { chatApi } from '../../Api';
+import moment from 'moment/moment';
 
-export const Chat = ({ isShowChat, owner }) => {
-  const [chatData, setChatData] = useState();
-  const [chatId, setChatId] = useState();
+export const Chat = ({ isShowChat, owner, reqNumber }) => {
+  const [chatData, setChatData] = useState(null);
+  const [chatId, setChatId] = useState(null);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     getChatList();
   }, [])
   const getChatList = (id) => {
-    getChat({
+    chatApi({
       action: owner ? "getOwnerChats" : "getChats",
       reqNumber: reqNumber,
       viewerId: id || userId
@@ -34,8 +35,28 @@ export const Chat = ({ isShowChat, owner }) => {
     getChatList(id);
   }
 
+  const hadleChange = (event) => {
+    setMessage(event.target.value);
+  }
+
   const sendMesssage = () => {
-    // action : sendMessage, senderId : тот кто пишет, toId : кому пишет, reqNumber : номеробъекта, message : сообщение
+    const newMessage = {
+      created: moment().format('YYYY-MM-DD'),
+      fromUserId: userId,
+      message: message,
+    };
+    setChatData((prevState) => ({
+      ...prevState,
+      messages: [...prevState.messages, newMessage]
+    }));
+    chatApi({
+      action: 'sendMessage',
+      senderId: userId,
+      toId: chatId,
+      reqNumber: reqNumber,
+      message: message,
+    })
+    setMessage('');
   }
   return (
     <>
@@ -73,6 +94,7 @@ export const Chat = ({ isShowChat, owner }) => {
                   <ChatMessage
                     key={idx}
                     message={message}
+                    isLast={chatData.messages.length - 1 === idx}
                   />
                 )
               }
@@ -82,9 +104,13 @@ export const Chat = ({ isShowChat, owner }) => {
                 fullWidth
                 autoComplete='off'
                 size='small'
+                onChange={hadleChange}
+                value={message}
+                onKeyDown={(event) => event.key === "Enter" && sendMesssage()}
               />
               <IconButton
                 color="primary"
+                onClick={sendMesssage}
               >
                 <SendIcon />
               </IconButton>
@@ -104,9 +130,3 @@ export const Chat = ({ isShowChat, owner }) => {
     </>
   );
 };
-
-const ChatTitle = styled.span`
-  font-family: Montserrat, sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-`

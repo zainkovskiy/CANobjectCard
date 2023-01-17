@@ -16,9 +16,12 @@ export function Content(props) {
   const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation, isShowChat, isShowMap } = props;
   return (
     <>
-    <StatusBar
-      status={object?.objectStatus || -1}
-    />
+      {
+        object.reqType === '1c' &&
+        <StatusBar
+          status={object?.objectStatus || -1}
+        />
+      }
       <Title
         params={object.params}
         editBtnShow={object?.blocks?.buttons?.edit || false}
@@ -78,14 +81,17 @@ export function Content(props) {
           >
             Показать на карте
           </Button>
-          <Button
-            size="small"
-            fullWidth
-            variant="contained"
-            onClick={isShowChat}
-          >
-            Чат
-          </Button>
+          {
+            object.reqType === '1c' &&
+            <Button
+              size="small"
+              fullWidth
+              variant="contained"
+              onClick={isShowChat}
+            >
+              Чат
+            </Button>
+          }
         </div>
       </div>
     </>

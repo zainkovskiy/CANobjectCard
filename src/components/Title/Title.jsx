@@ -60,6 +60,12 @@ export function Title(props) {
         <span>{params.reqPrice} т. руб.</span>
       </p>
     }
+    {
+      params?.hasComission === '1' &&
+      <span className="title__commision">
+        Готов делиться комиссией {params.sizeComission} {params.typeComission}
+      </span>
+    }
     <AnimatePresence initial={false}>
       {
         editPrice &&

@@ -130,6 +130,7 @@ export class App extends Component {
                     <Chat
                       isShowChat={this.isShowChat}
                       owner={this.state?.object?.blocks?.header?.client?.isShow || false}
+                      reqNumber={this.state?.object?.reqNumber || reqNumber}
                     />
                   </Dialog>
                 }

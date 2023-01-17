@@ -173,14 +173,6 @@ export function About(props) {
             }
           </>
         }
-        {
-          about?.hasComission === '1' && 
-          <>
-            {
-              <p className="about__bottom-text">Готов делиться комиссией<span>{about.sizeComission} {about.typeComission}</span></p>
-            }
-          </>
-        }
       </div>
     </div>
   )

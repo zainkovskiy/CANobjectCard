@@ -16,7 +16,9 @@ export function Content(props) {
   const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation, isShowChat, isShowMap } = props;
   return (
     <>
-    <StatusBar/>
+    <StatusBar
+      status={object?.objectStatus || -1}
+    />
       <Title
         params={object.params}
         editBtnShow={object?.blocks?.buttons?.edit || false}

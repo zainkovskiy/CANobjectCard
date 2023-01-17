@@ -1,27 +1,22 @@
 .chat {
-  height: 40vh;
-  width: 400px;
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  z-index: 99;
-  background-color: #fff;
   display: flex;
-  flex-direction: column;
   &__text{
     font-family: 'Montserrat', sans-serif;
   }
-  &__header{
-    padding: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
+  &__list{
+    max-width: 40%;
+    width: 40%;
+    height: 400px;
+    overflow: auto;
   }
   &__field{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    height: 400px;
+  }
+  &__messages{
     flex-grow: 1;
     overflow: auto;
     padding: 0.5rem;
@@ -29,17 +24,9 @@
     flex-direction: column;
     gap: 0.5rem;
     background-color: aliceblue;
+    border-radius: 5px;
   }
   &__send{
     display: flex;
-    padding: 0.5rem;
-    gap: 0.5rem;
   }
 }
-
-// .message-field {
-//   border: 1px solid black;
-//   width: 100%;
-//   background-color: aquamarine;
-//   border-radius: 4px;
-// }

@@ -6,9 +6,8 @@ const StatusBarStyleComponent = styled.div`
   display: flex;
   gap: 1rem;
 `
-const status = 2;
 
-export const StatusBar = () => {
+export const StatusBar = ({status}) => {
   return (
     <StatusBarStyleComponent>
       {
@@ -27,7 +26,7 @@ export const StatusBar = () => {
 };
 
 const statusList = [
-  'Что то на П',
+  'Черновик',
   'Листинг',
   'Реклама',
   'Сделка',

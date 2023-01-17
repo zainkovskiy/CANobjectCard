@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Dialog from '@mui/material/Dialog';
 import axios from 'axios';
-import { AnimatePresence } from 'framer-motion';
-
 
 import './App.scss';
 
@@ -121,14 +119,20 @@ export class App extends Component {
                   isShowChat={this.isShowChat}
                   isShowMap={this.isShowMap}
                 />
-                <AnimatePresence>
-                  {
-                    this.state.openChat &&
+                {
+                  this.state.openChat &&
+                  <Dialog
+                    onClose={this.isShowChat}
+                    open={this.state.openChat}
+                    maxWidth={'lg'}
+                    fullWidth={true}
+                  >
                     <Chat
                       isShowChat={this.isShowChat}
+                      owner={this.state?.object?.blocks?.header?.client?.isShow || false}
                     />
-                  }
-                </AnimatePresence>
+                  </Dialog>
+                }
                 {this.state.responsibleOpen && (
                   <Dialog
                     open={this.state.responsibleOpen}

@@ -58,6 +58,12 @@ export const Chat = ({ isShowChat, owner, reqNumber }) => {
     })
     setMessage('');
   }
+  const isDisabledInput = () => {
+    if (owner && !chatId) {
+      return true
+    }
+    return false
+  }
   return (
     <>
       <DialogTitle>
@@ -107,10 +113,12 @@ export const Chat = ({ isShowChat, owner, reqNumber }) => {
                 onChange={hadleChange}
                 value={message}
                 onKeyDown={(event) => event.key === "Enter" && sendMesssage()}
+                disabled={isDisabledInput()}
               />
               <IconButton
                 color="primary"
                 onClick={sendMesssage}
+                disabled={isDisabledInput()}
               >
                 <SendIcon />
               </IconButton>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 
 import Button from '@mui/material/Button';
 import DialogContent from '@mui/material/DialogContent';
@@ -27,6 +26,7 @@ export function Relevant(props) {
       const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', {
         UID: clientUID,
         action: 'getPhone',
+        reqNumber: reqNumber,
       })
       res?.data && setClient(res.data)
     } catch (err) {

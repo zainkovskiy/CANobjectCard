@@ -90,6 +90,12 @@ export function Content(props) {
               onClick={isShowChat}
             >
               Чат
+              {
+                object?.unreadMessages &&
+                <>
+                  ({object.unreadMessages})
+                </>
+              }
             </Button>
           }
         </div>

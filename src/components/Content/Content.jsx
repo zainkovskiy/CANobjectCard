@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Nav } from 'components/Nav'
 import { Title } from 'components/Title';
 import { Photo } from 'components/Photo';
@@ -8,6 +7,8 @@ import { Status } from 'components/Status';
 import { Ad } from 'components/Ad';
 import { About } from 'components/About';
 import { Description } from "components/Description";
+import { CatalogShow } from "components/CatalogShow";
+import { Realtor } from "components/Realtor";
 
 import './Content.scss';
 import { Button } from "@mui/material";
@@ -61,13 +62,27 @@ export function Content(props) {
         </div>
         <div className="right-panel">
           {
+            object.reqType === '1c' &&
+            <Realtor
+              realtorInfo={object?.blocks?.header?.realtor}
+              responsibleOpen={responsibleOpen}
+            />
+          }
+          {
             object?.blocks?.header?.isShow &&
             <Status
               status={object.blocks.header}
-              responsibleOpen={responsibleOpen}
+              // responsibleOpen={responsibleOpen}
               source={object.reqType}
               phone={object?.params && object?.params?.reqPhone ? object.params.reqPhone : ''}
               directRequest={object.direct_request}
+            />
+          }
+          {
+            object?.blocks?.header?.client?.isShow &&
+            <CatalogShow
+              isChecked={object?.params?.isPrivateVar || false}
+              reqNumber={object.reqNumber}
             />
           }
           {/* <Cords
@@ -91,7 +106,7 @@ export function Content(props) {
             >
               Чат
               {
-                object?.unreadMessages &&
+                (object?.unreadMessages && object?.unreadMessages > 0) &&
                 <>
                   ({object.unreadMessages})
                 </>

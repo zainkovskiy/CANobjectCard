@@ -10,22 +10,22 @@ export function Status(props) {
   const { status, responsibleOpen, source, phone, directRequest } = props;
 
   const [showClientPhone, setShowClientPhone] = useState(false);
-  const [sliderWidth, setSliderWidth] = useState('');
+  // const [sliderWidth, setSliderWidth] = useState('');
 
-  useEffect(() => {
-    setSliderWidth(document.getElementById('root').clientWidth)
-  }, [])
+  // useEffect(() => {
+  //   setSliderWidth(document.getElementById('root').clientWidth)
+  // }, [])
 
   const handlerOpenClientPhone = () => {
     setShowClientPhone(!showClientPhone)
   }
 
-  const openRealtor = (realtor) => {
-    if (status.realtor && status.realtor.isShow) {
-      let readyString = `https://crm.centralnoe.ru/company/personal/user/${realtor}/`;
-      BX.SidePanel.Instance.open(readyString, { animationDuration: 300, width: sliderWidth, });
-    }
-  }
+  // const openRealtor = (realtor) => {
+  //   if (status.realtor && status.realtor.isShow) {
+  //     let readyString = `https://crm.centralnoe.ru/company/personal/user/${realtor}/`;
+  //     BX.SidePanel.Instance.open(readyString, { animationDuration: 300, width: sliderWidth, });
+  //   }
+  // }
 
   return (
     <div className="status">
@@ -60,7 +60,7 @@ export function Status(props) {
         status.reqStatus &&
         <p className="status__row">Статус<span>{status.reqStatus}</span></p>
       }
-      {
+      {/* {
         source === '1c' &&
         <p className="status__row">Риелтор
           <span>
@@ -80,7 +80,7 @@ export function Status(props) {
             }
           </span>
         </p>
-      }
+      } */}
       <Dialog
         open={showClientPhone}
         onClose={handlerOpenClientPhone}

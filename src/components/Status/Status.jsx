@@ -60,6 +60,10 @@ export function Status(props) {
         status.reqStatus &&
         <p className="status__row">Статус<span>{status.reqStatus}</span></p>
       }
+      {
+        (status?.dmclickDiscount && status?.dmclickDiscount !== 'В скидке - отказано! Причина - Объект не является продажей квартиры') &&
+        <p className="status__row">Скидка Домклик<span>{status.dmclickDiscount}</span></p>
+      }
       {/* {
         source === '1c' &&
         <p className="status__row">Риелтор

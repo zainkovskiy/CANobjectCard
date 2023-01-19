@@ -106,7 +106,7 @@ export function Content(props) {
             >
               Чат
               {
-                (object?.unreadMessages && object?.unreadMessages > 0) &&
+                (object?.unreadMessages > 0) &&
                 <>
                   ({object.unreadMessages})
                 </>

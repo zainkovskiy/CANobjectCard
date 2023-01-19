@@ -55,6 +55,7 @@ export function Content(props) {
           <About
             about={object.params}
             source={object.reqType}
+            domClick={object?.dmclickDiscount || null}
           />
           <Description
             comment={object?.params?.reqComment || ''}

@@ -26,6 +26,13 @@ export function Status(props) {
   //     BX.SidePanel.Instance.open(readyString, { animationDuration: 300, width: sliderWidth, });
   //   }
   // }
+  const openDeal = () => {
+    const sliderWidth = document.getElementById('root').clientWidth;
+    if (status?.realtor && status?.realtor?.isShow) {
+      let readyString = `https://crm.centralnoe.ru/company/personal/user/${status.deal || 1}/`;
+      BX.SidePanel.Instance.open(readyString, { animationDuration: 300, width: sliderWidth, });
+    }
+  }
 
   return (
     <div className="status">
@@ -37,7 +44,7 @@ export function Status(props) {
         (source === '1c' && status?.deal) &&
         <p
           className="status__row"
-          onClick={() => BX.SidePanel.Instance.open(`https://crm.centralnoe.ru/crm/deal/details/${status.deal ? status.deal : dealId}/`, { animationDuration: 300, width: sliderWidth, })}
+          onClick={openDeal}
         >Сделка<span className="status__link">{status.deal ? status.deal : dealId}</span>
         </p>
       }
@@ -59,10 +66,6 @@ export function Status(props) {
       {
         status.reqStatus &&
         <p className="status__row">Статус<span>{status.reqStatus}</span></p>
-      }
-      {
-        (status?.dmclickDiscount && status?.dmclickDiscount !== 'В скидке - отказано! Причина - Объект не является продажей квартиры') &&
-        <p className="status__row">Скидка Домклик<span>{status.dmclickDiscount}</span></p>
       }
       {/* {
         source === '1c' &&

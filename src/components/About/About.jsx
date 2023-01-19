@@ -2,7 +2,7 @@ import React from "react";
 import './About.scss';
 
 export function About(props) {
-  const { about, source } = props;
+  const { about, source, domClick } = props;
 
   return (
     <div className="about">
@@ -172,6 +172,10 @@ export function About(props) {
               <p className="about__bottom-text">Тип дома<span>{about.typeOfHouse}</span></p>
             }
           </>
+        }
+        {
+          (domClick && domClick !== 'В скидке - отказано! Причина - Объект не является продажей квартиры') &&
+          <p className="about__bottom-text">Скидка Домклик<span>{domClick}</span></p>
         }
       </div>
     </div>

@@ -29,7 +29,7 @@ export function Status(props) {
   const openDeal = () => {
     const sliderWidth = document.getElementById('root').clientWidth;
     if (status?.realtor && status?.realtor?.isShow) {
-      let readyString = `https://crm.centralnoe.ru/company/personal/user/${status.deal || 1}/`;
+      let readyString = `https://crm.centralnoe.ru/crm/deal/details/${status?.deal || 1}/`;
       BX.SidePanel.Instance.open(readyString, { animationDuration: 300, width: sliderWidth, });
     }
   }

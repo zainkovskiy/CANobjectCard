@@ -80,7 +80,7 @@ export function Content(props) {
             />
           }
           {
-            object?.blocks?.header?.client?.isShow &&
+            (object.reqType === '1c' && object?.blocks?.header?.client?.isShow) &&
             <CatalogShow
               isChecked={object?.params?.isPrivateVar || false}
               reqNumber={object.reqNumber}

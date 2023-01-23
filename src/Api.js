@@ -6,6 +6,11 @@ export const chatApi = async (raw) => {
     return res.data
   }
 }
+
 export const toggleIsPrivateVar = async (raw) => {
+  const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', raw);
+}
+
+export const setReserved = async (raw) => {
   const res = await axios.post('https://hs-01.centralnoe.ru/Project-Selket-Main/Servers/Object/Controller.php', raw);
 }

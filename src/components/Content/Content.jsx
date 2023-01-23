@@ -9,12 +9,14 @@ import { About } from 'components/About';
 import { Description } from "components/Description";
 import { CatalogShow } from "components/CatalogShow";
 import { Realtor } from "components/Realtor";
+import { Reserved } from "components/Reserved";
+
 
 import './Content.scss';
 import { Button } from "@mui/material";
 
 export function Content(props) {
-  const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation, isShowChat, isShowMap } = props;
+  const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation, isShowChat, isShowMap, isShowReserv } = props;
   return (
     <>
       {
@@ -89,11 +91,15 @@ export function Content(props) {
           {/* <Cords
             cords={(object.blocks.map.lat && object.blocks.map.lng) ? [object.blocks.map.lat, object.blocks.map.lng] : []}
           /> */}
+          {
+            object?.blocks?.header?.realtor?.name === 'Свободный объект' &&
+            <Reserved/>
+          }
           <Button
             size="small"
             fullWidth
             variant="outlined"
-            onClick={isShowMap}
+            onClick={isShowReserv}
           >
             Показать на карте
           </Button>

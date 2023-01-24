@@ -16,13 +16,13 @@ import './Content.scss';
 import { Button } from "@mui/material";
 
 export function Content(props) {
-  const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation, isShowChat, isShowMap, isShowReserv } = props;
+  const { object, responsibleOpen, setNewPrice, openDialogPhotoMaker, openDialogReservation, isShowChat, isShowMap } = props;
   return (
     <>
       {
         object.reqType === '1c' &&
         <StatusBar
-          status={object?.objectStatus || -1}
+          status={object?.objectStatus}
         />
       }
       <Title
@@ -65,7 +65,7 @@ export function Content(props) {
         </div>
         <div className="right-panel">
           {
-            object.reqType === '1c' &&
+            object.reqType === '1c' && 
             <Realtor
               realtorInfo={object?.blocks?.header?.realtor}
               responsibleOpen={responsibleOpen}
@@ -79,6 +79,7 @@ export function Content(props) {
               source={object.reqType}
               phone={object?.params && object?.params?.reqPhone ? object.params.reqPhone : ''}
               directRequest={object.direct_request}
+              currentStatus={object?.params?.reqStatus}
             />
           }
           {
@@ -99,7 +100,7 @@ export function Content(props) {
             size="small"
             fullWidth
             variant="outlined"
-            onClick={isShowReserv}
+            onClick={isShowMap}
           >
             Показать на карте
           </Button>

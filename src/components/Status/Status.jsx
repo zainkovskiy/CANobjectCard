@@ -7,7 +7,7 @@ import { Relevant } from 'components/Relevant';
 import './Status.scss';
 
 export function Status(props) {
-  const { status, responsibleOpen, source, phone, directRequest } = props;
+  const { status, responsibleOpen, source, phone, directRequest, currentStatus } = props;
 
   const [showClientPhone, setShowClientPhone] = useState(false);
   // const [sliderWidth, setSliderWidth] = useState('');
@@ -45,7 +45,15 @@ export function Status(props) {
         <p
           className="status__row"
           onClick={openDeal}
-        >Сделка<span className="status__link">{status.deal ? status.deal : dealId}</span>
+        >
+          Сделка
+          <span className="status__link">
+            {status.deal ? status.deal : dealId}
+            {
+              status?.expiration &&
+              ` до ${moment(status?.expiration).locale('ru').format('DD.MM.YYYY')}`
+            }
+          </span>
         </p>
       }
       {
@@ -65,7 +73,11 @@ export function Status(props) {
       }
       {
         status.reqStatus &&
-        <p className="status__row">Статус<span>{status.reqStatus}</span></p>
+        <p className="status__row">Договор<span>{status.reqStatus}</span></p>
+      }
+      {
+        currentStatus &&
+        <p className="status__row">Статус<span>{currentStatus}</span></p>
       }
       {/* {
         source === '1c' &&

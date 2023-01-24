@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Alert from '@mui/material/Alert';
 import { Button } from "@mui/material";
 import { AnimatePresence, motion } from 'framer-motion';
@@ -11,6 +12,7 @@ export const Reserved = () => {
   }
   return (
     <>
+    <Text>Если хотите увидеть номер телефона, необходимо забрать объект</Text>
       <AnimatePresence initial={false}>
         {
           alert ?
@@ -103,3 +105,11 @@ const AlertReserved = ({ handleClick }) => {
     </motion.div>
   )
 }
+
+const Text = styled.span`
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  color: #737373;
+  font-size: 12px;
+`

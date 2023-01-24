@@ -12,18 +12,24 @@ export const Realtor = ({ realtorInfo, responsibleOpen }) => {
       <Header>
         <Title>Риелтор</Title>
         {
-          realtorInfo?.isShowChange &&
+          (realtorInfo?.isShowChange && realtorInfo?.name !== 'Свободный объект') &&
           <Button
-          onClick={responsibleOpen}
+            onClick={responsibleOpen}
           >сменить</Button>
         }
       </Header>
       {
-        realtorInfo?.isShow ?
-          <Link
-            onClick={openRealtor}
-          >{realtorInfo?.name}</Link> :
-          <Text>Не указан</Text>
+        realtorInfo?.name === 'Свободный объект' ?
+          <Text>{realtorInfo?.name}</Text> :
+          <>
+            {
+              realtorInfo?.isShow ?
+                <Link
+                  onClick={openRealtor}
+                >{realtorInfo?.name}</Link> :
+                <Text>Не указан</Text>
+            }
+          </>
       }
     </div >
   );
